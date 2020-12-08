@@ -122,16 +122,14 @@ CellularError_t Cellular_CommonInit( CellularHandle_t * pCellularHandle,
     CellularContext_t * pContext = NULL;
     CellularTokenTable_t tokenTable =
     {
-        .pCellularUrcHandlerTable              = CellularUrcHandlerTable,
-        .cellularPrefixToParserMapSize         = CellularUrcHandlerTableSize,
-        .pCellularSrcTokenErrorTable           = CellularSrcTokenErrorTable,
-        .cellularSrcTokenErrorTableSize        = CellularSrcTokenErrorTableSize,
-        .pCellularSrcTokenSuccessTable         = CellularSrcTokenSuccessTable,
-        .cellularSrcTokenSuccessTableSize      = CellularSrcTokenSuccessTableSize,
-        .pCellularUrcTokenWoPrefixTable        = CellularUrcTokenWoPrefixTable,
-        .cellularUrcTokenWoPrefixTableSize     = CellularUrcTokenWoPrefixTableSize,
-        .pCellularSrcExtraTokenSuccessTable    = NULL,
-        .cellularSrcExtraTokenSuccessTableSize = 0
+        .pCellularUrcHandlerTable          = CellularUrcHandlerTable,
+        .cellularPrefixToParserMapSize     = CellularUrcHandlerTableSize,
+        .pCellularSrcTokenErrorTable       = CellularSrcTokenErrorTable,
+        .cellularSrcTokenErrorTableSize    = CellularSrcTokenErrorTableSize,
+        .pCellularSrcTokenSuccessTable     = CellularSrcTokenSuccessTable,
+        .cellularSrcTokenSuccessTableSize  = CellularSrcTokenSuccessTableSize,
+        .pCellularUrcTokenWoPrefixTable    = CellularUrcTokenWoPrefixTable,
+        .cellularUrcTokenWoPrefixTableSize = CellularUrcTokenWoPrefixTableSize
     };
 
     /* Init the Cellular HAL common. */
@@ -234,9 +232,6 @@ CellularError_t Cellular_CommonRegisterUrcPdnEventCallback( CellularHandle_t cel
 
 /*-----------------------------------------------------------*/
 
-/* This function is provided as common code to cellular module porting.
- * Vendor may choose to use this function or use their implementation. */
-/* coverity[misra_c_2012_rule_8_7_violation]. */
 CellularError_t Cellular_CommonRegisterUrcSignalStrengthChangedCallback( CellularHandle_t cellularHandle,
                                                                          CellularUrcSignalStrengthChangedCallback_t signalStrengthChangedCallback,
                                                                          void * pCallbackContext )

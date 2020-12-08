@@ -1,0 +1,39 @@
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Error: The file SBSFU.elf does not exist, please check the file's path
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Error: The file SBSFU.elf does not exist, please check the file's path
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Error: Overlap between the two ELF files
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Warning: The ELF file will be overwritten
+ELF file modified succesfully
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Warning: The ELF file will be overwritten
+ELF file modified succesfully
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Warning: The ELF file will be overwritten
+ELF file modified succesfully
+      -------------------------------------------------------------------
+                       STM32CubeProgrammer v2.4.0                  
+      -------------------------------------------------------------------
+
+Warning: The ELF file will be overwritten
+ELF file modified succesfully

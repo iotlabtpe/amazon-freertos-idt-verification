@@ -63,7 +63,7 @@
 /**
  * @brief Timeout for receiving CONNACK packet in milliseconds.
  */
-#define mqttexampleCONNACK_RECV_TIMEOUT_MS           ( 1000U )
+#define mqttexampleCONNACK_RECV_TIMEOUT_MS           ( 5000U )
 
 /**
  * @brief The number of topic filters to subscribe.
@@ -78,7 +78,7 @@
 /**
  * @brief Timeout for MQTT_ProcessLoop in milliseconds.
  */
-#define mqttexamplePROCESS_LOOP_TIMEOUT_MS           ( 500U )
+#define mqttexamplePROCESS_LOOP_TIMEOUT_MS           ( 5000U )
 
 /**
  * @brief Keep alive time reported to the broker while establishing an MQTT connection.
@@ -88,7 +88,7 @@
  * absence of sending any other Control Packets, the Client MUST send a
  * PINGREQ Packet.
  */
-#define mqttexampleKEEP_ALIVE_TIMEOUT_SECONDS        ( 60U )
+#define mqttexampleKEEP_ALIVE_TIMEOUT_SECONDS        ( 600U )
 
 /**
  * @brief Delay between MQTT publishes. Note that the process loop also has a

@@ -1341,39 +1341,24 @@ static CellularPktStatus_t _Cellular_RecvFuncGetEidrxSettings( CellularContext_t
         pEidrxSettingsList = ( CellularEidrxSettingsList_t * ) pData;
         pCommnadItem = pAtResp->pItm;
 
-        while( ( pCommnadItem != NULL ) && ( pktStatus == CELLULAR_PKT_STATUS_OK ) )
+        while( pCommnadItem != NULL )
         {
             pInputLine = pCommnadItem->pLine;
+            atCoreStatus = parseEidrxLine( pInputLine, count, pEidrxSettingsList );
+            pktStatus = _Cellular_TranslateAtCoreStatus( atCoreStatus );
 
-            if( pInputLine == NULL )
+            if( pktStatus != CELLULAR_PKT_STATUS_OK )
             {
-                IotLogError( "GetEidrx: Invalid input line" );
-                pktStatus = CELLULAR_PKT_STATUS_FAILURE;
-            }
-            else if( ( strcmp( "+CEDRXS: 0", pInputLine ) == 0 ) ||
-                     ( strcmp( "+CEDRXS:", pInputLine ) == 0 ) )
-            {
-                IotLogDebug( "GetEidrx: empty EDRXS setting %s", pInputLine );
+                IotLogError( "GetEidrx: Parsing Error encountered, atCoreStatus: %d", atCoreStatus );
             }
             else
             {
-                atCoreStatus = parseEidrxLine( pInputLine, count, pEidrxSettingsList );
-                pktStatus = _Cellular_TranslateAtCoreStatus( atCoreStatus );
-
-                if( pktStatus != CELLULAR_PKT_STATUS_OK )
-                {
-                    IotLogError( "GetEidrx: Parsing Error encountered, atCoreStatus: %d", atCoreStatus );
-                }
-                else
-                {
-                    IotLogDebug( "GetEidrx setting[%d]: RAT: %d, Value: 0x%x",
-                                 count, pEidrxSettingsList->eidrxList[ count ].rat,
-                                 pEidrxSettingsList->eidrxList[ count ].requestedEdrxVaue );
-                    count++;
-                }
+                IotLogDebug( "GetEidrx setting[%d]: RAT: %d, Value: 0x%x",
+                             count, pEidrxSettingsList->eidrxList[ count ].rat, pEidrxSettingsList->eidrxList[ count ].requestedEdrxVaue );
             }
 
             pCommnadItem = pCommnadItem->pNext;
+            count++;
             pEidrxSettingsList->count = count;
         }
     }
@@ -1413,7 +1398,6 @@ static CellularError_t atcmdQueryRegStatus( CellularContext_t * pContext,
 {
     CellularError_t cellularStatus = CELLULAR_SUCCESS;
     const cellularAtData_t * pLibAtData = NULL;
-    CellularNetworkRegistrationStatus_t psRegStatus = CELLULAR_NETWORK_REGISTRATION_STATUS_UNKNOWN;
 
     if( pContext == NULL )
     {
@@ -1423,24 +1407,7 @@ static CellularError_t atcmdQueryRegStatus( CellularContext_t * pContext,
     {
         cellularStatus = queryNetworkStatus( pContext, "AT+CREG?", "+CREG", CELLULAR_REG_TYPE_CREG );
 
-        /* Added below +CGREG support as some modems also support GSM/EDGE network. */
         if( cellularStatus == CELLULAR_SUCCESS )
-        {
-            /* Ignoe the network status query return value with CGREG. Some modem
-             * may not support EDGE or GSM. In this case, psRegStatus is not stored
-             * in libAtData. CEREG will be used to query the ps network status. */
-            ( void ) queryNetworkStatus( pContext, "AT+CGREG?", "+CGREG", CELLULAR_REG_TYPE_CGREG );
-        }
-
-        /* Check if modem acquired GPRS Registration. */
-        /* Query CEREG only if the modem did not already acquire PS registration. */
-        _Cellular_LockAtDataMutex( pContext );
-        psRegStatus = pContext->libAtData.psRegStatus;
-        _Cellular_UnlockAtDataMutex( pContext );
-
-        if( ( cellularStatus == CELLULAR_SUCCESS ) &&
-            ( psRegStatus != CELLULAR_NETWORK_REGISTRATION_STATUS_REGISTERED_HOME ) &&
-            ( psRegStatus != CELLULAR_NETWORK_REGISTRATION_STATUS_REGISTERED_ROAMING ) )
         {
             cellularStatus = queryNetworkStatus( pContext, "AT+CEREG?", "+CEREG", CELLULAR_REG_TYPE_CEREG );
         }
