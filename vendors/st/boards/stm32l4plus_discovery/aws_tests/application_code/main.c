@@ -93,9 +93,9 @@ extern WIFIReturnCode_t WIFI_GetFirmwareVersion( uint8_t * pucBuffer );
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 #if testrunnerFULL_CRYPTO_ENABLED
-#define mainTEST_RUNNER_TASK_STACK_SIZE                 ( 2300 )
+#define mainTEST_RUNNER_TASK_STACK_SIZE                 ( configMINIMAL_STACK_SIZE * 10 )
 #else
-#define mainTEST_RUNNER_TASK_STACK_SIZE                 ( 1600 )  // 1100 is enough for most tests. 1600 for ScheduleTasks_ScheduleAllThenWait()
+#define mainTEST_RUNNER_TASK_STACK_SIZE                 ( configMINIMAL_STACK_SIZE * 8 ) 
 #endif
 
 /* USER CODE END PM */
@@ -175,6 +175,7 @@ static void testRunnerTask( void * pvParameters )
     /* Connect to the cellular network before running the demos. */
     retCellular = setupCellular();
     configPRINTF(("MBEDTLS_SSL_MAX_CONTENT_LEN %d\n", MBEDTLS_SSL_MAX_CONTENT_LEN ));
+
     if( retCellular == false )
     {
         configPRINTF( ( "Cellular failed to initialize.\r\n" ) );
