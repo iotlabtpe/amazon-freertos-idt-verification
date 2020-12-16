@@ -34,7 +34,7 @@
 #define PACKET_REQ_TIMEOUT_MS                      ( 5000UL )
 
 /* AT Command timeout for Socket disconnection */
-#define SOCKET_DISCONNECT_PACKET_REQ_TIMEOUT_MS    ( 12000UL )
+#define SOCKET_DISCONNECT_PACKET_REQ_TIMEOUT_MS    ( 20000UL )
 
 #define DATA_SEND_TIMEOUT_MS                       ( 50000UL )
 #define DATA_READ_TIMEOUT_MS                       ( 50000UL )

@@ -56,7 +56,7 @@ set(
 target_compile_definitions(
     AFR::compiler::mcu_port
     INTERFACE $<$<NOT:$<COMPILE_LANGUAGE:ASM>>:${defined_symbols}>
-    $<${AFR_IS_TESTING}:MBEDTLS_USER_CONFIG_FILE=\"mbedtls_user_config.h\">
+    #$<${AFR_IS_TESTING}:MBEDTLS_USER_CONFIG_FILE=\"mbedtls_user_config.h\">
 )
 
 set(common_flags "-mcpu=cortex-m4" "-mthumb" "-mfloat-abi=hard" "-mfpu=fpv4-sp-d16" -DSTM32L4S5xx)

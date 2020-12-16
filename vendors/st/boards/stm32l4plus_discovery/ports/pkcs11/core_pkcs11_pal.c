@@ -651,8 +651,8 @@ CK_RV PKCS11_PAL_GetObjectValue( CK_OBJECT_HANDLE xHandle,
          */
         if( ( P11KeyConfig.ulDevicePubKeyMark & pkcs11OBJECT_PRESENT_MASK ) == pkcs11OBJECT_PRESENT_MAGIC )
         {
-            *ppucData = P11KeyConfig.cDevicePubKey;
-            *pulDataSize = ( uint32_t ) P11KeyConfig.ulDevicePubKeyMark & pkcs11OBJECT_LENGTH_MASK;
+            *ppucData = P11KeyConfig.cDeviceKey;
+            *pulDataSize = ( uint32_t ) ( P11KeyConfig.ulDeviceKeyMark & pkcs11OBJECT_LENGTH_MASK );
             *pIsPrivate = CK_FALSE;
             ulReturn = CKR_OK;
         }
