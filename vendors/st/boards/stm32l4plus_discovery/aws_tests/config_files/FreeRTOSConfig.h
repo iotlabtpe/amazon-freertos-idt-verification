@@ -26,7 +26,7 @@
 
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
-
+#include "unity_internals.h"
 /*-----------------------------------------------------------
 * Application specific definitions.
 *
@@ -43,9 +43,6 @@
 #if !defined(__IASMARM__)
     #include <stdint.h>
     extern uint32_t SystemCoreClock;
-#ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
-#include "unity_internals.h"
-#endif /* AMAZON_FREERTOS_ENABLE_UNIT_TESTS */
 #endif
 
 #define stMAX_SECTOR_SIZE         4       /* For Flash update */
@@ -101,9 +98,7 @@
 #define INCLUDE_vTaskDelay                           1
 #define INCLUDE_xTaskGetSchedulerState               1
 #define INCLUDE_xTimerPendFunctionCall               1
-#ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
 #define INCLUDE_xSemaphoreGetMutexHolder             1
-#endif /* AMAZON_FREERTOS_ENABLE_UNIT_TESTS */
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
@@ -135,14 +130,8 @@
 
 /* Normal assert() semantics without relying on the provision of an assert.h
  * header file. */
-#ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
 #define configASSERT( x )                                       \
     if( ( x ) == 0 )  TEST_ABORT()
-#else /* AMAZON_FREERTOS_ENABLE_UNIT_TESTS */
-#define configASSERT( x )                                        \
-    if( ( x ) == 0 ) { configPRINTF(("assert...!!")); taskDISABLE_INTERRUPTS(); for( ; ; ) {; } \
-    }
-#endif /* AMAZON_FREERTOS_ENABLE_UNIT_TESTS */
 
 /* Logging task definitions. */
 #if !defined(__IASMARM__)

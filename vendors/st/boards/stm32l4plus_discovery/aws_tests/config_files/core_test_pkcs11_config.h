@@ -64,12 +64,12 @@
 /*
  * @brief Set to 1 if RSA private keys are supported by the platform.  0 if not.
  */
-#define pkcs11testRSA_KEY_SUPPORT                     ( 1 )
+#define pkcs11testRSA_KEY_SUPPORT              ( 1 )
 
 /*
  * @brief Set to 1 if elliptic curve private keys are supported by the platform.  0 if not.
  */
-#define pkcs11testEC_KEY_SUPPORT                      ( 0 )
+#define pkcs11testEC_KEY_SUPPORT              ( 1 )
 
 /**
  * @brief Size of the stack for each task in multi task test.
@@ -79,12 +79,12 @@
 /*
  * @brief Set to 1 if importing device private key via C_CreateObject is supported.  0 if not.
  */
-#define pkcs11testIMPORT_PRIVATE_KEY_SUPPORT          ( pkcs11configIMPORT_PRIVATE_KEYS_SUPPORTED )
+#define pkcs11testIMPORT_PRIVATE_KEY_SUPPORT              ( 1 )
 
 /*
  * @brief Set to 1 if generating a device private-public key pair via C_GenerateKeyPair. 0 if not.
  */
-#define pkcs11testGENERATE_KEYPAIR_SUPPORT            ( 0 )
+#define pkcs11testGENERATE_KEYPAIR_SUPPORT            ( 1 )
 
 /**
  * @brief The PKCS #11 label for device private key for test.
