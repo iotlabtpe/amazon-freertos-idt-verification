@@ -1,1 +1,0 @@
- /c/idt_test/amazon-freertos/vendors/st/stm32l4plus_discovery/PostBuildScripts/prepareimage/prepareimage.exe
